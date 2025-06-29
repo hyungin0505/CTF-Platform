@@ -18,4 +18,8 @@ public class ChallengeFile extends BaseEntity {
     @Column(nullable = false, length = 100, unique = true)
     private String url;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "challenge")
+    private Challenge challenge;
+
 }

@@ -18,4 +18,8 @@ public class ChallengeServer extends BaseEntity {
     @Column(nullable = false, length = 100, updatable = false)
     private String url;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "challenge")
+    private Challenge challenge;
+
 }

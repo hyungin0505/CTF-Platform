@@ -3,10 +3,16 @@ package com.ctfplatform.backend.domain;
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import com.ctfplatform.backend.domain.enums.Category;
 import com.ctfplatform.backend.domain.enums.Difficulty;
+import com.ctfplatform.backend.domain.mapping.ChallengeAuthor;
+import com.ctfplatform.backend.domain.mapping.ChallengeSubmission;
+import com.ctfplatform.backend.domain.mapping.SolveLog;
+import com.ctfplatform.backend.domain.mapping.TryChance;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -43,5 +49,26 @@ public class Challenge extends BaseEntity {
 
     private LocalDateTime open_time;
     private LocalDateTime close_time;
+
+    @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<ChallengeAuthor> challenge_author = new ArrayList<>();
+
+    @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<ChallengeServer> challengeServer = new ArrayList<>();
+
+    @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<ChallengeFile> challengeFile = new ArrayList<>();
+
+    @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<ChallengeHint> challengeHint = new ArrayList<>();
+
+    @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<TryChance> tryChance = new ArrayList<>();
+
+    @OneToMany(mappedBy = "challenge")
+    private List<SolveLog> solveLog = new ArrayList<>();
+
+    @OneToMany(mappedBy = "challenge")
+    private List<ChallengeSubmission> challengeSubmission = new ArrayList<>();
 
 }

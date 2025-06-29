@@ -22,4 +22,9 @@ public class ChallengeHint extends BaseEntity {
     @Builder.Default
     @Column(nullable = false)
     private Integer points = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "challenge")
+    private Challenge challenge;
+
 }
