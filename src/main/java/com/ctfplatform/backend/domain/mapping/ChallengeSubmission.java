@@ -1,5 +1,8 @@
 package com.ctfplatform.backend.domain.mapping;
 
+import com.ctfplatform.backend.domain.Challenge;
+import com.ctfplatform.backend.domain.Team;
+import com.ctfplatform.backend.domain.User;
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,5 +23,17 @@ public class ChallengeSubmission extends BaseEntity {
 
     @Column(nullable = false)
     private Boolean correct;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team")
+    private Team team;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "challenge")
+    private Challenge challenge;
 
 }
