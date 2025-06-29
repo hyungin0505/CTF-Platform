@@ -36,4 +36,8 @@ public class Team extends BaseEntity {
     @Builder.Default
     private Integer points = 0;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organizatoin")
+    private Organization organization;
+
 }
