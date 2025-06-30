@@ -1,7 +1,8 @@
-package com.ctfplatform.backend.domain;
+package com.ctfplatform.backend.domain.team;
 
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import com.ctfplatform.backend.domain.enums.Country;
+import com.ctfplatform.backend.domain.organization.Organization;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,5 +1,6 @@
-package com.ctfplatform.backend.domain;
+package com.ctfplatform.backend.domain.announcement;
 
+import com.ctfplatform.backend.domain.user.User;
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,17 +10,18 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ChallengeFile extends BaseEntity {
+public class AnnouncementAuthor extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100, unique = true)
-    private String url;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "announcement")
+    private Announcement announcement;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "challenge")
-    private Challenge challenge;
+    @JoinColumn(name = "user")
+    private User user;
 
 }

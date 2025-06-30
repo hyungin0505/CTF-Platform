@@ -1,7 +1,6 @@
-package com.ctfplatform.backend.domain.mapping;
+package com.ctfplatform.backend.domain.challenge;
 
-import com.ctfplatform.backend.domain.Challenge;
-import com.ctfplatform.backend.domain.User;
+import com.ctfplatform.backend.domain.user.User;
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;

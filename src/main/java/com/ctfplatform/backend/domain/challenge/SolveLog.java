@@ -1,8 +1,7 @@
-package com.ctfplatform.backend.domain.mapping;
+package com.ctfplatform.backend.domain.challenge;
 
-import com.ctfplatform.backend.domain.Challenge;
-import com.ctfplatform.backend.domain.Team;
-import com.ctfplatform.backend.domain.User;
+import com.ctfplatform.backend.domain.team.Team;
+import com.ctfplatform.backend.domain.user.User;
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,17 +11,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ChallengeSubmission extends BaseEntity {
+public class SolveLog extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, length = 100)
-    private String flag_hash;
-
-    @Column(nullable = false)
-    private Boolean correct;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user")
