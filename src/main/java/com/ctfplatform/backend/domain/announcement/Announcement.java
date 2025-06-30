@@ -1,7 +1,6 @@
-package com.ctfplatform.backend.domain;
+package com.ctfplatform.backend.domain.announcement;
 
 import com.ctfplatform.backend.domain.common.BaseEntity;
-import com.ctfplatform.backend.domain.mapping.AnnouncementAuthor;
 import jakarta.persistence.*;
 import lombok.*;
 

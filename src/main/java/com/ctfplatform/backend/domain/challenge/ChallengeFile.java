@@ -1,7 +1,5 @@
-package com.ctfplatform.backend.domain.mapping;
+package com.ctfplatform.backend.domain.challenge;
 
-import com.ctfplatform.backend.domain.Challenge;
-import com.ctfplatform.backend.domain.Team;
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,19 +9,14 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class TryChance extends BaseEntity {
+public class ChallengeFile extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Builder.Default
-    @Column(nullable = false)
-    private Integer attempts = 0;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team")
-    private Team team;
+    @Column(nullable = false, length = 100, unique = true)
+    private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "challenge")

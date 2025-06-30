@@ -1,4 +1,4 @@
-package com.ctfplatform.backend.domain;
+package com.ctfplatform.backend.domain.organization;
 
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import com.ctfplatform.backend.domain.enums.Type;

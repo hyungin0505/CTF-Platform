@@ -1,9 +1,10 @@
-package com.ctfplatform.backend.domain;
+package com.ctfplatform.backend.domain.user;
 
 import com.ctfplatform.backend.domain.common.BaseEntity;
 import com.ctfplatform.backend.domain.enums.Country;
 import com.ctfplatform.backend.domain.enums.Role;
 import com.ctfplatform.backend.domain.enums.Status;
+import com.ctfplatform.backend.domain.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
