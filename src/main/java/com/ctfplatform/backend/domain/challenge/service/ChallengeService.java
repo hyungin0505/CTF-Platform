@@ -9,6 +9,7 @@ import com.ctfplatform.backend.domain.challenge.repository.ChallengeRepository;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeSubmissionRepository;
 import com.ctfplatform.backend.domain.challenge.repository.SolveLogRepository;
 import com.ctfplatform.backend.domain.challenge.repository.UserRepository;
+import com.ctfplatform.backend.domain.team.repository.TeamRepository;
 import com.ctfplatform.backend.domain.user.User;
 import com.ctfplatform.backend.exception.BaseException;
 import com.ctfplatform.backend.exception.ErrorCode;
@@ -30,6 +31,7 @@ public class ChallengeService {
     private final SolveLogRepository solveLogRepository;
     private final ChallengeSubmissionRepository challengeSubmissionRepository;
     private final UserRepository userRepository;
+    private final TeamRepository teamRepository;
 
     public List<ChallengeListResponse> getAllChallenges() {
         return challengeRepository.findAll().stream()
@@ -97,6 +99,9 @@ public class ChallengeService {
 
             user.addPoints(challenge.getPoints());
             userRepository.save(user);
+
+            user.getTeam().addPoints(challenge.getPoints());
+            teamRepository.save(user.getTeam());
         }
 
         return new FlagSubmitResultResponse(
