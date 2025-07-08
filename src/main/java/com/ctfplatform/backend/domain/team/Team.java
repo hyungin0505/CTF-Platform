@@ -41,4 +41,11 @@ public class Team extends BaseEntity {
     @JoinColumn(name = "organizatoin")
     private Organization organization;
 
+    public void addPoints(int earnedPoints) {
+        if (this.points == null) {
+            this.points = 0;
+        };
+        this.points += earnedPoints;
+    }
+
 }
