@@ -15,7 +15,7 @@ public record ChallengeDetailResponse(
         String category,
         String difficulty,
         Integer points,
-        Integer tryChance,
+        Integer chance,
         LocalDateTime openTime,
         LocalDateTime closeTime,
         List<ChallengeAuthor> challengeAuthors,

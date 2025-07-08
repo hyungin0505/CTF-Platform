@@ -32,7 +32,7 @@ public class Team extends BaseEntity {
     private Country country;
 
     @Column(nullable = false, length = 16)
-    private String invite_token;
+    private String inviteToken;
 
     @Builder.Default
     private Integer points = 0;

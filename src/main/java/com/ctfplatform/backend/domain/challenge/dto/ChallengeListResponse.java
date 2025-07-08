@@ -6,5 +6,5 @@ public record ChallengeListResponse(
         String category,
         String difficulty,
         Integer points,
-        Integer tryChance
+        Integer chance
 ) {}

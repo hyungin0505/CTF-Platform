@@ -37,17 +37,17 @@ public class Challenge extends BaseEntity {
     private Difficulty difficulty;
 
     @Column(nullable = false, length = 100, unique = true)
-    private String flag_hash;
+    private String flagHash;
 
     private Integer points;
 
-    private Integer try_chance;
+    private Integer chance;
 
-    private LocalDateTime open_time;
-    private LocalDateTime close_time;
+    private LocalDateTime openTime;
+    private LocalDateTime closeTime;
 
     @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-    private List<ChallengeAuthor> challenge_author = new ArrayList<>();
+    private List<ChallengeAuthor> challengeAuthor = new ArrayList<>();
 
     @OneToMany(mappedBy = "challenge", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<ChallengeServer> challengeServer = new ArrayList<>();
