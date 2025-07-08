@@ -39,7 +39,7 @@ public class ChallengeService {
                         ch.getCategory().name(),
                         ch.getDifficulty().name(),
                         ch.getPoints(),
-                        ch.getTry_chance()
+                        ch.getTryChance()
                 ))
                 .toList();
     }
@@ -55,7 +55,7 @@ public class ChallengeService {
                 challenge.getCategory().name(),
                 challenge.getDifficulty().name(),
                 challenge.getPoints(),
-                challenge.getTry_chance(),
+                challenge.getChance(),
                 challenge.getOpenTime(),
                 challenge.getCloseTime(),
                 challenge.getChallengeAuthor(),

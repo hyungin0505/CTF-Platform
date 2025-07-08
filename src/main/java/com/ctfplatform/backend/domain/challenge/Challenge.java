@@ -41,7 +41,7 @@ public class Challenge extends BaseEntity {
 
     private Integer points;
 
-    private Integer try_chance;
+    private Integer chance;
 
     private LocalDateTime openTime;
     private LocalDateTime closeTime;
