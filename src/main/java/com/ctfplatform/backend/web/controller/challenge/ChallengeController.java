@@ -6,6 +6,7 @@ import com.ctfplatform.backend.domain.challenge.service.ChallengeService;
 import com.ctfplatform.backend.web.dto.challenge.FlagSubmitRequest;
 import com.ctfplatform.backend.web.dto.challenge.FlagSubmitResultResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,11 +29,11 @@ public class ChallengeController {
     }
 
     @PostMapping("/{id}/submit")
-    public FlagSubmitResultResponse submitFlag(
+    public ResponseEntity<FlagSubmitResultResponse> submitFlag(
             @PathVariable Long id,
             @RequestBody FlagSubmitRequest request,
             @RequestParam Long userId // 로그인 사용자
     ) {
-        return challengeService.submitFlag(id, userId, request);
+        return ResponseEntity.ok(challengeService.submitFlag(id, userId, request));
     }
 }
