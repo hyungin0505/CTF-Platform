@@ -61,4 +61,11 @@ public class User extends BaseEntity {
     @JoinColumn(name = "team")
     private Team team;
 
+    public void addPoints(int points) {
+        if (this.points == null) {
+            this.points = 0;
+        }
+        this.points += points;
+    }
+
 }

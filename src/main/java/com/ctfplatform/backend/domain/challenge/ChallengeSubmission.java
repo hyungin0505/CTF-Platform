@@ -18,7 +18,7 @@ public class ChallengeSubmission extends BaseEntity {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    private String flag_hash;
+    private String flagHash;
 
     @Column(nullable = false)
     private Boolean correct;

@@ -1,13 +1,13 @@
-package com.ctfplatform.backend.web.controller;
+package com.ctfplatform.backend.web.controller.challenge;
 
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
 import com.ctfplatform.backend.domain.challenge.service.ChallengeService;
+import com.ctfplatform.backend.web.dto.challenge.FlagSubmitRequest;
+import com.ctfplatform.backend.web.dto.challenge.FlagSubmitResultResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +25,14 @@ public class ChallengeController {
     @GetMapping("/{id}")
     public ChallengeDetailResponse getChallenge(@PathVariable Long id) {
         return challengeService.getChallengeDetail(id);
+    }
+
+    @PostMapping("/{id}/submit")
+    public ResponseEntity<FlagSubmitResultResponse> submitFlag(
+            @PathVariable Long id,
+            @RequestBody FlagSubmitRequest request,
+            @RequestParam Long userId // 로그인 사용자
+    ) {
+        return ResponseEntity.ok(challengeService.submitFlag(id, userId, request));
     }
 }
