@@ -39,7 +39,7 @@ public class ChallengeService {
                         ch.getCategory().name(),
                         ch.getDifficulty().name(),
                         ch.getPoints(),
-                        ch.getTryChance()
+                        ch.getChance()
                 ))
                 .toList();
     }
@@ -77,7 +77,7 @@ public class ChallengeService {
             throw new BaseException(ErrorCode.ALREADY_SOLVED);
         }
 
-        boolean isCorrect = flagValidator.matches(request.flag(), challenge.getFlag_hash());
+        boolean isCorrect = flagValidator.matches(request.flag(), challenge.getFlagHash());
 
         ChallengeSubmission submission = ChallengeSubmission.builder()
                 .challenge(challenge)
