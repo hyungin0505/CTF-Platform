@@ -56,9 +56,9 @@ public class ChallengeService {
                 challenge.getDifficulty().name(),
                 challenge.getPoints(),
                 challenge.getTry_chance(),
-                challenge.getOpen_time(),
-                challenge.getClose_time(),
-                challenge.getChallenge_author(),
+                challenge.getOpenTime(),
+                challenge.getCloseTime(),
+                challenge.getChallengeAuthor(),
                 challenge.getChallengeServer(),
                 challenge.getChallengeFile(),
                 challenge.getChallengeHint()
