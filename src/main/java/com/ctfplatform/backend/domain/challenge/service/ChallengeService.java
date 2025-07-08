@@ -4,6 +4,7 @@ import com.ctfplatform.backend.domain.challenge.Challenge;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeRepository;
+import com.ctfplatform.backend.domain.challenge.repository.SolveLogRepository;
 import com.ctfplatform.backend.exception.BaseException;
 import com.ctfplatform.backend.exception.ErrorCode;
 import com.ctfplatform.backend.utils.FlagValidator;
@@ -20,6 +21,7 @@ public class ChallengeService {
 
     private final ChallengeRepository challengeRepository;
     private final FlagValidator flagValidator;
+    private final SolveLogRepository solveLogRepository;
 
     public List<ChallengeListResponse> getAllChallenges() {
         return challengeRepository.findAll().stream()
@@ -59,7 +61,9 @@ public class ChallengeService {
         Challenge challenge = challengeRepository.findById(challengeId)
                 .orElseThrow(() -> new BaseException(ErrorCode.CHALLENGE_NOT_FOUND));
 
-        if (/* 이미 푼 문제인지 검사 조건문 */) {
+        boolean alreadySolved = solveLogRepository.existsByUserIdAndChallengeId(userId, challengeId);
+
+        if (alreadySolved) {
             throw new BaseException(ErrorCode.ALREADY_SOLVED);
         }
 

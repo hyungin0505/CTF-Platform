@@ -31,8 +31,8 @@ public class ChallengeController {
     public FlagSubmitResultResponse submitFlag(
             @PathVariable Long id,
             @RequestBody FlagSubmitRequest request,
-            @AuthenticationPrincipal UserPrincipal user // 로그인 사용자
+            @RequestParam Long userId // 로그인 사용자
     ) {
-        return challengeService.submitFlag(id, user.getId(), request);
+        return challengeService.submitFlag(id, userId, request);
     }
 }
