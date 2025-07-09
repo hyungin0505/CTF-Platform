@@ -4,4 +4,6 @@ import com.ctfplatform.backend.domain.challenge.ChallengeSubmission;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ChallengeSubmissionRepository extends JpaRepository<ChallengeSubmission, Long> {
+    int countByTeamId(Long teamid);
+    int countByTeamIdAndCorrectTrue(Long teamId);
 }
