@@ -11,6 +11,8 @@ public enum ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
     ALREADY_IN_TEAM(HttpStatus.CONFLICT, "이미 팀에 속해있습니다."),
     TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "팀이 존재하지 않습니다."),
+    ALREADY_REGISTERED(HttpStatus.CONFLICT, "이미 회원가입된 이메일입니다."),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호가 잘못되었습니다."),
 
     ;
 

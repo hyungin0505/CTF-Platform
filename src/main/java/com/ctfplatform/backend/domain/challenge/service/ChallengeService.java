@@ -9,7 +9,7 @@ import com.ctfplatform.backend.domain.challenge.dto.HintResponse;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeRepository;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeSubmissionRepository;
 import com.ctfplatform.backend.domain.challenge.repository.SolveLogRepository;
-import com.ctfplatform.backend.domain.challenge.repository.UserRepository;
+import com.ctfplatform.backend.domain.user.repository.UserRepository;
 import com.ctfplatform.backend.domain.team.repository.TeamRepository;
 import com.ctfplatform.backend.domain.user.User;
 import com.ctfplatform.backend.exception.BaseException;
