@@ -18,9 +18,9 @@ public record ChallengeDetailResponse(
         Integer chance,
         LocalDateTime openTime,
         LocalDateTime closeTime,
-        List<ChallengeAuthor> challengeAuthors,
-        List<ChallengeServer> challengeServers,
-        List<ChallengeFile> challengeFiles,
-        List<ChallengeHint> challengeHints
+        List<String> authors,
+        List<String> servers,
+        List<String> files,
+        List<HintResponse> hints
 ) {
 }

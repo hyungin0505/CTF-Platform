@@ -5,6 +5,7 @@ import com.ctfplatform.backend.domain.challenge.ChallengeSubmission;
 import com.ctfplatform.backend.domain.challenge.SolveLog;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
+import com.ctfplatform.backend.domain.challenge.dto.HintResponse;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeRepository;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeSubmissionRepository;
 import com.ctfplatform.backend.domain.challenge.repository.SolveLogRepository;
@@ -60,10 +61,19 @@ public class ChallengeService {
                 challenge.getChance(),
                 challenge.getOpenTime(),
                 challenge.getCloseTime(),
-                challenge.getChallengeAuthor(),
-                challenge.getChallengeServer(),
-                challenge.getChallengeFile(),
-                challenge.getChallengeHint()
+
+                challenge.getChallengeAuthor().stream()
+                        .map(author -> author.getUser().getNickname())
+                        .toList(),
+                challenge.getChallengeServer().stream()
+                        .map(server -> server.getUrl())
+                        .toList(),
+                challenge.getChallengeFile().stream()
+                        .map(file -> file.getUrl())
+                        .toList(),
+                challenge.getChallengeHint().stream()
+                        .map(hint -> new HintResponse(hint.getHint(), hint.getPoints()))
+                        .toList()
         );
     }
 
