@@ -1,10 +1,12 @@
 package com.ctfplatform.backend.domain.team.dto;
 
+import com.ctfplatform.backend.domain.enums.Country;
+
 public record TeamResponse(
         Long id,
         String name,
         String link,
         String description,
-        com.ctfplatform.backend.domain.enums.Country country,
+        Country country,
         String inviteToken
 ) { }
