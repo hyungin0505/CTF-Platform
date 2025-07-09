@@ -99,7 +99,7 @@ public class TeamService {
 
         int totalSolves = solveLogRepository.countByTeamId(teamId);
         int totalSubmissions = challengeSubmissionRepository.countByTeamId(teamId);
-        int correctSubmissions = challengeSubmissionRepository.countByTeamId(teamId);
+        int correctSubmissions = challengeSubmissionRepository.countByTeamIdAndCorrectTrue(teamId);
         double accuracy = totalSubmissions > 0 ? (double) correctSubmissions / (double) totalSubmissions : 0.0;
 
         return new TeamStatsResponse(
