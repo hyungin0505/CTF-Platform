@@ -37,6 +37,7 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private LocalDate birth;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Builder.Default
     @Column(nullable = false, length = 10)
@@ -57,6 +58,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String passwordHash;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team")
     private Team team;
