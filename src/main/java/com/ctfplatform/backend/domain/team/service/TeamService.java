@@ -2,7 +2,7 @@ package com.ctfplatform.backend.domain.team.service;
 
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeSubmissionRepository;
 import com.ctfplatform.backend.domain.challenge.repository.SolveLogRepository;
-import com.ctfplatform.backend.domain.challenge.repository.UserRepository;
+import com.ctfplatform.backend.domain.user.repository.UserRepository;
 import com.ctfplatform.backend.domain.enums.Country;
 import com.ctfplatform.backend.domain.enums.Role;
 import com.ctfplatform.backend.domain.team.Team;
