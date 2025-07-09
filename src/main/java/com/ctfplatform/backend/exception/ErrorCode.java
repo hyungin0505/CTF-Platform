@@ -10,6 +10,7 @@ public enum ErrorCode {
     ALREADY_SOLVED(HttpStatus.BAD_REQUEST, "이미 푼 문제입니다."),
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
     ALREADY_IN_TEAM(HttpStatus.CONFLICT, "이미 팀에 속해있습니다."),
+    TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "팀이 존재하지 않습니다."),
 
     ;
 
