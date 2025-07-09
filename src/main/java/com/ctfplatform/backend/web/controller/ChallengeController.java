@@ -1,4 +1,4 @@
-package com.ctfplatform.backend.web.controller.challenge;
+package com.ctfplatform.backend.web.controller;
 
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
