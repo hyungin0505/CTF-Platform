@@ -1,6 +1,7 @@
 package com.ctfplatform.backend.web.controller;
 
 import com.ctfplatform.backend.domain.team.dto.TeamCreateRequest;
+import com.ctfplatform.backend.domain.team.dto.TeamJoinRequest;
 import com.ctfplatform.backend.domain.team.dto.TeamResponse;
 import com.ctfplatform.backend.domain.team.service.TeamService;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,13 @@ public class TeamController {
             @RequestParam Long userId
             ) {
         return ResponseEntity.ok(teamService.createTeam(userId, request));
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<TeamResponse> joinTeam(
+            @RequestBody TeamJoinRequest request,
+            @RequestParam Long userId
+    ) {
+        return ResponseEntity.ok(teamService.joinTeam(userId, request.inviteToken()));
     }
 }

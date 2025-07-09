@@ -58,4 +58,31 @@ public class TeamService {
                 team.getInviteToken()
         );
     }
+
+    @Transactional
+    public TeamResponse joinTeam(Long userId, String inviteToken) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(ErrorCode.USER_NOT_FOUND));
+
+        if (user.getTeam() != null) {
+            throw new BaseException(ErrorCode.ALREADY_IN_TEAM);
+        }
+
+        Team team = teamRepository.findByInviteToken(inviteToken)
+                .orElseThrow(() -> new BaseException(ErrorCode.TEAM_NOT_FOUND));
+
+        user.setTeam(team);
+        user.setRole(Role.MEMBER);
+        userRepository.save(user);
+
+        return new TeamResponse(
+                team.getId(),
+                team.getName(),
+                team.getLink(),
+                team.getDescription(),
+                team.getCountry(),
+                team.getInviteToken()
+        );
+    }
+
 }
