@@ -22,7 +22,6 @@ public class UserService {
         return new UserInfoResponse(
                 user.getId(),
                 user.getNickname(),
-                user.getEmail(),
                 user.getCountry() != null ? Country.valueOf(user.getCountry().name()) : null,
                 user.getRole() != null ? user.getRole().name() : null,
                 user.getTeam() != null ? user.getTeam().getName() : null,
