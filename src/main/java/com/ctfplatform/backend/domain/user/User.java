@@ -34,7 +34,6 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 32)
     private Country country;
 
-    @Column(nullable = false)
     private LocalDate birth;
 
     @Setter

@@ -30,7 +30,9 @@ public class AuthService {
                 .email(request.email())
                 .passwordHash(passwordEncoder.encode(request.password()))
                 .nickname(request.nickname())
+                .name(request.name())
                 .country(Country.valueOf(request.country()))
+                .birth(request.birth())
                 .points(0)
                 .build();
 
