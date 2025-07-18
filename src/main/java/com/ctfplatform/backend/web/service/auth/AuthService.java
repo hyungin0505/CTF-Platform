@@ -1,5 +1,7 @@
 package com.ctfplatform.backend.web.service.auth;
 
+import com.ctfplatform.backend.domain.enums.Role;
+import com.ctfplatform.backend.domain.enums.Status;
 import com.ctfplatform.backend.domain.user.repository.UserRepository;
 import com.ctfplatform.backend.domain.enums.Country;
 import com.ctfplatform.backend.domain.user.User;
@@ -31,9 +33,12 @@ public class AuthService {
                 .passwordHash(passwordEncoder.encode(request.password()))
                 .nickname(request.nickname())
                 .name(request.name())
+                .link(request.link())
                 .country(Country.valueOf(request.country()))
                 .birth(request.birth())
                 .points(0)
+                .status(Status.ACTIVE)
+                .role(Role.USER)
                 .build();
 
         userRepository.save(user);

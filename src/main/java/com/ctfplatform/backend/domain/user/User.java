@@ -40,7 +40,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     @Column(nullable = false, length = 10)
-    private Role role = Role.LEADER;
+    private Role role = Role.USER;
 
     @Column(length = 50)
     private String link;
@@ -52,7 +52,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     @Column(nullable = false, length = 10)
-    private Status status = Status.INACTIVE;
+    private Status status = Status.ACTIVE;
 
     @Column(nullable = false, length = 100)
     private String passwordHash;
@@ -63,9 +63,6 @@ public class User extends BaseEntity {
     private Team team;
 
     public void addPoints(int points) {
-        if (this.points == null) {
-            this.points = 0;
-        }
         this.points += points;
     }
 
