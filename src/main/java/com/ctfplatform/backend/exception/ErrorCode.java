@@ -13,6 +13,7 @@ public enum ErrorCode {
     TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "팀이 존재하지 않습니다."),
     ALREADY_REGISTERED(HttpStatus.CONFLICT, "이미 회원가입된 이메일입니다."),
     INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호가 잘못되었습니다."),
+    DUPLICATE_ORGANIZATION(HttpStatus.CONFLICT, "이미 존재하는 기관입니다."),
 
     ;
 
