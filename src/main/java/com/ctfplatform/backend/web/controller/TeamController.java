@@ -34,8 +34,8 @@ public class TeamController {
     @PostMapping("/join")
     public ResponseEntity<TeamResponse> joinTeam(
             @RequestBody TeamJoinRequest request,
-            @RequestParam Long userId
-    ) {
-        return ResponseEntity.ok(teamService.joinTeam(userId, request.inviteToken()));
+            @AuthenticationPrincipal User user
+            ) {
+        return ResponseEntity.ok(teamService.joinTeam(user, request.inviteToken()));
     }
 }

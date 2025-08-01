@@ -62,10 +62,7 @@ public class TeamService {
     }
 
     @Transactional
-    public TeamResponse joinTeam(Long userId, String inviteToken) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new BaseException(ErrorCode.USER_NOT_FOUND));
-
+    public TeamResponse joinTeam(User user, String inviteToken) {
         if (user.getTeam() != null) {
             throw new BaseException(ErrorCode.ALREADY_IN_TEAM);
         }
