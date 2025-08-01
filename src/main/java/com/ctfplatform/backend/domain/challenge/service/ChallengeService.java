@@ -1,8 +1,6 @@
 package com.ctfplatform.backend.domain.challenge.service;
 
-import com.ctfplatform.backend.domain.challenge.Challenge;
-import com.ctfplatform.backend.domain.challenge.ChallengeSubmission;
-import com.ctfplatform.backend.domain.challenge.SolveLog;
+import com.ctfplatform.backend.domain.challenge.*;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeCreateRequest;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
@@ -73,10 +71,10 @@ public class ChallengeService {
                         .map(author -> author.getUser().getNickname())
                         .toList(),
                 challenge.getChallengeServer().stream()
-                        .map(server -> server.getUrl())
+                        .map(ChallengeServer::getUrl)
                         .toList(),
                 challenge.getChallengeFile().stream()
-                        .map(file -> file.getUrl())
+                        .map(ChallengeFile::getUrl)
                         .toList(),
                 challenge.getChallengeHint().stream()
                         .map(hint -> new HintResponse(hint.getHint(), hint.getPoints()))
@@ -85,14 +83,11 @@ public class ChallengeService {
     }
 
     @Transactional
-    public FlagSubmitResultResponse submitFlag(Long challengeId, Long userId, FlagSubmitRequest request) {
+    public FlagSubmitResultResponse submitFlag(Long challengeId, User user, FlagSubmitRequest request) {
         Challenge challenge = challengeRepository.findById(challengeId)
                 .orElseThrow(() -> new BaseException(ErrorCode.CHALLENGE_NOT_FOUND));
 
-        User user = userRepository.findById(userId)
-                .orElseThrow( () -> new BaseException(ErrorCode.USER_NOT_FOUND));
-
-        if (solveLogRepository.existsByUserIdAndChallengeId(userId, challengeId)) {
+        if (solveLogRepository.existsByUserIdAndChallengeId(user.getId(), challengeId)) {
             throw new BaseException(ErrorCode.ALREADY_SOLVED);
         }
 
@@ -134,12 +129,14 @@ public class ChallengeService {
             throw new BaseException(ErrorCode.PERMISSION_DENIED);
         }
 
+        String flagHash = flagValidator.encode(request.flag());
+
         Challenge challenge = Challenge.builder()
                 .title(request.title())
                 .description(request.description())
                 .category(Category.valueOf(request.category().toUpperCase()))
                 .difficulty(Difficulty.valueOf(request.difficulty().toUpperCase()))
-                .flagHash(hashFlag(request.flag()))
+                .flagHash(flagHash)
                 .points(request.points())
                 .chance(request.chance())
                 .openTime(request.openTime())

@@ -10,4 +10,8 @@ public class FlagValidator {
     public boolean matches(String rawFlag, String hashedFlag) {
         return encoder.matches(rawFlag, hashedFlag);
     }
+
+    public String encode(String rawFlag) {
+        return encoder.encode(rawFlag);
+    }
 }
