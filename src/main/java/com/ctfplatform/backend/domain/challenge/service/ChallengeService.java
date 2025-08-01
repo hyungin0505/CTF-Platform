@@ -1,8 +1,6 @@
 package com.ctfplatform.backend.domain.challenge.service;
 
-import com.ctfplatform.backend.domain.challenge.Challenge;
-import com.ctfplatform.backend.domain.challenge.ChallengeSubmission;
-import com.ctfplatform.backend.domain.challenge.SolveLog;
+import com.ctfplatform.backend.domain.challenge.*;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeCreateRequest;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
@@ -73,10 +71,10 @@ public class ChallengeService {
                         .map(author -> author.getUser().getNickname())
                         .toList(),
                 challenge.getChallengeServer().stream()
-                        .map(server -> server.getUrl())
+                        .map(ChallengeServer::getUrl)
                         .toList(),
                 challenge.getChallengeFile().stream()
-                        .map(file -> file.getUrl())
+                        .map(ChallengeFile::getUrl)
                         .toList(),
                 challenge.getChallengeHint().stream()
                         .map(hint -> new HintResponse(hint.getHint(), hint.getPoints()))
