@@ -3,12 +3,16 @@ package com.ctfplatform.backend.domain.challenge.service;
 import com.ctfplatform.backend.domain.challenge.Challenge;
 import com.ctfplatform.backend.domain.challenge.ChallengeSubmission;
 import com.ctfplatform.backend.domain.challenge.SolveLog;
+import com.ctfplatform.backend.domain.challenge.dto.ChallengeCreateRequest;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeDetailResponse;
 import com.ctfplatform.backend.domain.challenge.dto.ChallengeListResponse;
 import com.ctfplatform.backend.domain.challenge.dto.HintResponse;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeRepository;
 import com.ctfplatform.backend.domain.challenge.repository.ChallengeSubmissionRepository;
 import com.ctfplatform.backend.domain.challenge.repository.SolveLogRepository;
+import com.ctfplatform.backend.domain.enums.Category;
+import com.ctfplatform.backend.domain.enums.Difficulty;
+import com.ctfplatform.backend.domain.enums.Role;
 import com.ctfplatform.backend.domain.user.repository.UserRepository;
 import com.ctfplatform.backend.domain.team.repository.TeamRepository;
 import com.ctfplatform.backend.domain.user.User;
@@ -21,6 +25,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Service
@@ -120,4 +127,44 @@ public class ChallengeService {
                 isCorrect ? challenge.getPoints() : 0
         );
     }
+
+    @Transactional
+    public Challenge createChallenge(ChallengeCreateRequest request, User user) {
+        if (user.getRole() != Role.ADMIN) {
+            throw new BaseException(ErrorCode.PERMISSION_DENIED);
+        }
+
+        Challenge challenge = Challenge.builder()
+                .title(request.title())
+                .description(request.description())
+                .category(Category.valueOf(request.category().toUpperCase()))
+                .difficulty(Difficulty.valueOf(request.difficulty().toUpperCase()))
+                .flagHash(hashFlag(request.flag()))
+                .points(request.points())
+                .chance(request.chance())
+                .openTime(request.openTime())
+                .closeTime(request.closeTime())
+                .build();
+
+        challengeRepository.save(challenge);
+
+        return challenge;
+    }
+
+    private String hashFlag(String flag) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(flag.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("SHA-256 not supported", e);
+        }
+    }
+
 }
