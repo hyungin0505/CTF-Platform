@@ -5,8 +5,10 @@ import com.ctfplatform.backend.domain.team.dto.TeamJoinRequest;
 import com.ctfplatform.backend.domain.team.dto.TeamResponse;
 import com.ctfplatform.backend.domain.team.dto.TeamStatsResponse;
 import com.ctfplatform.backend.domain.team.service.TeamService;
+import com.ctfplatform.backend.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -24,9 +26,9 @@ public class TeamController {
     @PostMapping("/create")
     public ResponseEntity<TeamResponse> createTeam(
             @RequestBody TeamCreateRequest request,
-            @RequestParam Long userId
+            @AuthenticationPrincipal User user
             ) {
-        return ResponseEntity.ok(teamService.createTeam(userId, request));
+        return ResponseEntity.ok(teamService.createTeam(user, request));
     }
 
     @PostMapping("/join")

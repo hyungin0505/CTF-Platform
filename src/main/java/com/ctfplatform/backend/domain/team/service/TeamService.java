@@ -29,10 +29,7 @@ public class TeamService {
     private final ChallengeSubmissionRepository challengeSubmissionRepository;
 
     @Transactional
-    public TeamResponse createTeam(Long userId, TeamCreateRequest request) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new BaseException(ErrorCode.USER_NOT_FOUND));
-
+    public TeamResponse createTeam(User user, TeamCreateRequest request) {
         if (user.getTeam() != null) {
             throw new BaseException(ErrorCode.ALREADY_IN_TEAM);
         }
