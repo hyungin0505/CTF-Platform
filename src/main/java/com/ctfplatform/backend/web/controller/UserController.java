@@ -1,9 +1,11 @@
 package com.ctfplatform.backend.web.controller;
 
+import com.ctfplatform.backend.domain.user.User;
 import com.ctfplatform.backend.domain.user.dto.UserInfoResponse;
 import com.ctfplatform.backend.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +21,10 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserInfoResponse> getUserInfo(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserInfo(id));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserInfoResponse> getMyInfo(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(UserInfoResponse.from(user));
     }
 }

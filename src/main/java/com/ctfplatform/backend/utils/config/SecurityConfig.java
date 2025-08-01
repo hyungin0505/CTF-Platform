@@ -1,11 +1,13 @@
 package com.ctfplatform.backend.utils.config;
 
+import com.ctfplatform.backend.web.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -15,20 +17,19 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // 임시
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
-                .csrf().disable()
-                .authorizeHttpRequests()
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                        "/api/auth/**",        // 로그인/회원가입은 인증 없이
+                        "/api/auth/**",
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic(); // Swagger에서도 인증 헤더 붙여서 테스트 가능
+            ).permitAll()
+            .anyRequest().authenticated()
+            )
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
