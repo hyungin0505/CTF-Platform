@@ -134,12 +134,14 @@ public class ChallengeService {
             throw new BaseException(ErrorCode.PERMISSION_DENIED);
         }
 
+        String flagHash = flagValidator.encode(request.flag());
+
         Challenge challenge = Challenge.builder()
                 .title(request.title())
                 .description(request.description())
                 .category(Category.valueOf(request.category().toUpperCase()))
                 .difficulty(Difficulty.valueOf(request.difficulty().toUpperCase()))
-                .flagHash(hashFlag(request.flag()))
+                .flagHash(flagHash)
                 .points(request.points())
                 .chance(request.chance())
                 .openTime(request.openTime())
