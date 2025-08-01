@@ -85,14 +85,11 @@ public class ChallengeService {
     }
 
     @Transactional
-    public FlagSubmitResultResponse submitFlag(Long challengeId, Long userId, FlagSubmitRequest request) {
+    public FlagSubmitResultResponse submitFlag(Long challengeId, User user, FlagSubmitRequest request) {
         Challenge challenge = challengeRepository.findById(challengeId)
                 .orElseThrow(() -> new BaseException(ErrorCode.CHALLENGE_NOT_FOUND));
 
-        User user = userRepository.findById(userId)
-                .orElseThrow( () -> new BaseException(ErrorCode.USER_NOT_FOUND));
-
-        if (solveLogRepository.existsByUserIdAndChallengeId(userId, challengeId)) {
+        if (solveLogRepository.existsByUserIdAndChallengeId(user.getId(), challengeId)) {
             throw new BaseException(ErrorCode.ALREADY_SOLVED);
         }
 

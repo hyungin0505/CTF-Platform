@@ -42,8 +42,8 @@ public class ChallengeController {
     public ResponseEntity<FlagSubmitResultResponse> submitFlag(
             @PathVariable Long id,
             @RequestBody FlagSubmitRequest request,
-            @RequestParam Long userId // 로그인 사용자
-    ) {
-        return ResponseEntity.ok(challengeService.submitFlag(id, userId, request));
+            @AuthenticationPrincipal User user
+            ) {
+        return ResponseEntity.ok(challengeService.submitFlag(id, user, request));
     }
 }
